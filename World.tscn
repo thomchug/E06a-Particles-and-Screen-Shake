@@ -1,20 +1,73 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
+[ext_resource path="res://Assets/rigzsoft/Symbols/6starhollow.png" type="Texture" id=3]
+[ext_resource path="res://Assets/rigzsoft/Flames/FlameStill3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/rigzsoft/Rays/laser1.png" type="Texture" id=5]
+
+[sub_resource type="Curve" id=1]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 11.4546 ), 0.0, 1005.19, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -30, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 1.0
+angle_curve = SubResource( 2 )
+color = Color( 0.113725, 0.776471, 0.819608, 1 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 18, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, -35, 0 )
+initial_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_random = 0.31
+color = Color( 0.901961, 0.407843, 0.0823529, 1 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.121569, 0.72549, 0.0862745, 1 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Particles1" type="Particles2D" parent="."]
-position = Vector2( 128, 256 )
+position = Vector2( 165.684, 252.985 )
+scale = Vector2( 0.5, 0.5 )
+amount = 6
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
 
 [node name="Particles2" type="Particles2D" parent="."]
 position = Vector2( 512, 256 )
+scale = Vector2( 0.1, 0.1 )
+amount = 100
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
 
 [node name="Particles3" type="Particles2D" parent="."]
 position = Vector2( 896, 256 )
+process_material = SubResource( 5 )
+texture = ExtResource( 5 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 304 )
+current = true
 script = ExtResource( 1 )
